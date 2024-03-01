@@ -16,7 +16,7 @@ public class Person {
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 char ")
     @Column(name="name")
     private String name;
-    @Min(value = 0, message = "Age should be greatest 0")
+    @Min(value = 1, message = "Age should be greatest 0")
     @Column(name = "age")
     private int age;
     public Person(){}

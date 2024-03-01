@@ -6,8 +6,12 @@
 </head>
 <body>
 <div th:each="person:${people}">
-    <a th:text="${person.getName() + ' ' + person.getAge()}" >text</a>
+    <a th:href="@{people/{id}(id = ${person.getId()})}"
+       th:text="${person.getName() + ' ' + person.getAge()}" >text</a>
 </div>
+<hr size="2" width="50%" align="left" color="grey"/>
 
 </body>
-</html>
+</html><form th:method="GET" th:action="@{/people/new}">
+    <button>Create Person</button>
+</form>
