@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bulanov.models.Person;
 import ru.bulanov.services.PeopleService;
+import ru.bulanov.utils.PersonValidator;
 
 
 @Controller
@@ -14,9 +15,11 @@ import ru.bulanov.services.PeopleService;
 public class PeopleController {
 
     private final PeopleService peopleService;
+    private final PersonValidator personValidator;
 
-    public PeopleController(PeopleService peopleService) {
+    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
         this.peopleService = peopleService;
+        this.personValidator = personValidator;
     }
     @GetMapping
     public String index(Model model){
@@ -34,7 +37,7 @@ public class PeopleController {
     }
     @PostMapping
     public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
-
+        personValidator.validate(person, bindingResult);
         if(bindingResult.hasErrors()){
             return "person/new";
         }
@@ -49,7 +52,7 @@ public class PeopleController {
     @PatchMapping("/{id}")
     public String changePerson(@PathVariable("id") int id, @ModelAttribute("person") @Valid Person person,
                                BindingResult bindingResult){
-
+        personValidator.validate(person, bindingResult);
         if(bindingResult.hasErrors()){
             return "person/edit";
         }

@@ -24,6 +24,9 @@ public class PeopleService {
         Optional<Person> person = peopleRepository.findById(id);
         return person.orElse(null);
     }
+    public Optional<Person> findByEmail(String email){
+        return peopleRepository.findByEmail(email);
+    }
     @Transactional
     public void save(Person person){
         peopleRepository.save(person);
@@ -37,4 +40,5 @@ public class PeopleService {
     public void delete(int id){
         peopleRepository.deleteById(id);
     }
+
 }
