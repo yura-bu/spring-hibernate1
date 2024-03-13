@@ -3,9 +3,11 @@ package ru.bulanov.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bulanov.models.Mood;
 import ru.bulanov.models.Person;
 import ru.bulanov.repositories.PeopleRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,8 @@ public class PeopleService {
     }
     @Transactional
     public void save(Person person){
+        person.setMood(Mood.HAPPY);
+        person.setCreateAt(new Date());
         peopleRepository.save(person);
     }
     @Transactional

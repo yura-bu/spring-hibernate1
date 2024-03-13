@@ -21,6 +21,10 @@
     <label for="address">Enter address: </label>
     <input th:type="text" th:field="*{address}" id="address">
     <br/>
+    <label for="day_of_birth">Enter day of birthday: </label>
+    <input th:type="text" th:field="*{dayOfBirth}" id="day_of_birth">
+    <div style="color: red" th:if="${#fields.hasErrors('dayOfBirth')}" th:errors="*{dayOfBirth}">Day of birth error</div>
+    <br/>
     <input type="submit" value="Create!">
 </form>
 </body>

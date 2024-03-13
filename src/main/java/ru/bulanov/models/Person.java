@@ -1,10 +1,10 @@
 package ru.bulanov.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "person")
@@ -26,6 +26,15 @@ public class Person {
     private String email;
     @Column(name = "address")
     private String address;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "day_of_birth")
+    private Date dayOfBirth;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_at")
+    private Date createAt;
+    @Enumerated(EnumType.ORDINAL)
+    private Mood mood;
 
     public Person(){}
 
@@ -74,6 +83,30 @@ public class Person {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Date getDayOfBirth() {
+        return dayOfBirth;
+    }
+
+    public void setDayOfBirth(Date dayOfBirthday) {
+        this.dayOfBirth = dayOfBirthday;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Mood getMood() {
+        return mood;
+    }
+
+    public void setMood(Mood mood) {
+        this.mood = mood;
     }
 
     @Override
